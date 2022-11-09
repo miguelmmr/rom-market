@@ -1,0 +1,29 @@
+.carousel-container {
+  margin: auto;
+  display: flex;
+  width: 600px;
+  
+}
+
+.carousel-slide {
+  margin: auto;
+  display: flex;
+}
+
+.carousel-item {
+    max-height: 400px;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
+
+  
+
+  
+  
+  
+  
+  

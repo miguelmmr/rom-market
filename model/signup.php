@@ -1,7 +1,7 @@
 <?php
     if(isset($_POST['submit'])){
         if(!empty($_POST['usuario']) && !empty($_POST['contrasena'])){
-            include('./model/connection.php');
+            include('connection.php');
             $usuario=$_POST['usuario'];
             $correo=$_POST['correo'];
             $nombre=$_POST['nombre'];
@@ -12,11 +12,18 @@
             $contrasena_hashed = password_hash($_POST['contrasena'], PASSWORD_DEFAULT);
 
             $stmt="INSERT INTO `rom_market`.`persona` (`correo`, `usuario`, `contrasena`, `nombre`, `apellido`, `cuenta_bancaria`, `direccion`, `estado`) VALUES ('".$correo."', '".$usuario."', '".$contrasena_hashed."', '".$nombre."', '".$apellido."', '".$tarjeta."', '".$direccion."', 'A');";
-            echo $stmt;
             $result=$conn->query($stmt);
 
-            echo "<br>";
-            echo $stmt;
+            session_start();
+            $qry2="SELECT cliente_id from persona p, cliente c where c.persona_id = p.persona_id and p.usuario='$user'";
+            echo $qry2;
+            $result=$conn->query($qry2);
+            $row=$result->fetch_array();
+            $_SESSION['user'] = $user;
+            $_SESSION['pass'] = $_POST['contrasena'];
+            $_SESSION['idCliente'] = $row[0];
+
+            header('Location: ../inicio.php');
         }
         else{
             header('Location: index.php?userlogin=fail');

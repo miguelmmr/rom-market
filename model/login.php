@@ -1,7 +1,7 @@
 <?php
     if(isset($_POST['submit'])){
         if(!empty($_POST['usuario']) && !empty($_POST['contrasena'])){
-            include('./model/connection.php');
+            include('connection.php');
             $user=$_POST['usuario'];
             $pass_hashed = password_hash($_POST['contrasena'], PASSWORD_DEFAULT);
             $qry="SELECT * FROM persona where usuario='".$user."' and contrasena = '".$pass_hashed."'";
@@ -23,6 +23,7 @@
                 $_SESSION['idCliente'] = $row[0];
                 echo "exito ";
                 echo  $_SESSION['idCliente'];
+                header('Location: ../inicio.php');
             }
         }
         else{

@@ -1,7 +1,10 @@
 <?php
+  session_start();
+
   require_once('controller/juego.controller.php');
   $juegoC = new JuegoController;
-  $juegosRecientes = $juegoC->ObtenerTableJuegosRecientes();  
+  $juegosRecientes = $juegoC->ObtenerTableJuegosRecientes(); 
+  $mejoresJuegos = $juegoC->ObtenerTableMejoresJuegos();  
 
   $currentYear = date("Y");
   $currentMonth = date("m");
@@ -23,6 +26,10 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/fontawesome.min.css" integrity="sha384-z4tVnCr80ZcL0iufVdGQSUzNvJsKjEtqYZjiQrrYKlpGow+btDHDfQWkFjoaz/Zr" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="styles/navbarBetaStyle.css">
+  <link rel="stylesheet" type="text/css" href="styles/sliderStyle.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Rom Market</title>
   <link rel="stylesheet" type="text/css" href="normalize.css">
@@ -30,48 +37,46 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu:500">
   <link rel="stylesheet" type="text/css" href="styles/inicioStyle.css">
+  
 
   
 </head>
   <body>
-    
-    <?php include('view/navbar.php')?>
 
-    <div class="container-slider">
-      <div class="slider" id="slider">
-        <div class="slider__section">
-          <img src="https://www.callofduty.com/content/dam/atvi/callof…b/main-tout/2022/09/9-27-hub-s5-5-announce-sm.jpg"  class="slider__img">
-          <div class="slider__content">
-            <h2 class="slider__title">Dota 2</h2>
-            <p class="slider__txt">sale 50% off</p>
-            <a href="" class="btn-shop">SHOP NOW</a>
-          </div>
-        </div>
-        <div class="slider__section">
-          <img src="https://i.blogs.es/de368e/dota-2-wallpaper/1366_2000.jpg" alt="" class="slider__img">
-          <div class="slider__content">
-            <h2 class="slider__title">Dota 2</h2>
-            <p class="slider__txt"> sale 50% off</p>
-            <a href="" class="btn-shop">SHOP NOW</a>
-          </div>
-        </div>
+    <?php include('view/navbarBeta.php');?>
 
-      <div class="slider__btn slider__btn--right" id="btn-right">&#62;</div>
-      <div class="slider__btn slider__btn--left" id="btn-left">&#60;</div>
-    </div>
-    <main class="main">
+    <?php include('view/slider.html');?>
+
+    <main class="main" style="padding-top: 20px;">
       <div class="container">
-        <h2 class="main-title">Juegos Recientes</h2>
+        <h2 class="main-title" style="font-weight: bold; color: black">Juegos Recientes</h2>
 
-        <section class="container-products">
-        <?php foreach($juegosRecientes as $juego){?>
-          <div class="          <?php if ($juego['fecha_lanzamiento']> $newRelease) {echo 'product-new';}else{echo 'product';} ?> ">
-            <img src="<?php echo $juego['direccion_imagen']; ?>" alt="" class="product__img">
+        <section class="container-products" style="padding-top: 20px; padding-bottom: 20px;">
+        <?php foreach($juegosRecientes as $juegoR){?>
+          <a href="detalles.php?juego_id=<?php echo $juegoR['juego_id']?>">
+          <div class="          <?php if ($juegoR['fecha_lanzamiento']> $newRelease) {echo 'product-new';}else{echo 'product';} ?> ">
+            <img src="<?php echo $juegoR['direccion_imagen']; ?>" alt="" class="product__img">
             <div class="product__description">
-              <h3 class="product__title"><?php echo $juego['nombre']; ?></h3>
-              <span class="product__price">$<?php echo $juego['precio']; ?></span>
+              <h3 class="product__title"><?php echo $juegoR['nombre']; ?></h3>
+              <span class="product__price">$<?php echo $juegoR['precio']; ?></span>
             </div>
-            <i class="product__icon fas fa-cart-plus"></i>
+            <i class="product__icon fa fa-cart-plus" style="font-size:16px" ></i>
+          </div>
+          </a>
+        <?php } ?>
+        </section>
+
+        <h2 class="main-title" style="font-weight: bold; padding-top: 20px; color: black">Mejores Juegos</h2>
+
+        <section class="container-products" style="padding-top: 20px;">
+        <?php foreach($mejoresJuegos as $juegoM){?>
+          <div class="          <?php if ($juegoM['fecha_lanzamiento']> $newRelease) {echo 'product-new';}else{echo 'product';} ?> ">
+            <img src="<?php echo $juegoM['direccion_imagen']; ?>" alt="" class="product__img">
+            <div class="product__description">
+              <h3 class="product__title"><?php echo $juegoM['nombre']; ?></h3>
+              <span class="product__price">$<?php echo $juegoM['precio']; ?></span>
+            </div>
+            <i class="product__icon fa fa-cart-plus" style="font-size:16px" ></i>
           </div>
         <?php } ?>
         </section>
@@ -118,6 +123,9 @@
     <?php include('view/footer.html')?>
 
   </body>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+  <script src="scripts/navbarTest3.js" ></script>
 </html>
 
 ?>
