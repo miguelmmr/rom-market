@@ -20,7 +20,7 @@
                 $row=$result->fetch_array();
                 $_SESSION['user'] = $user;
                 $_SESSION['pass'] = $_POST['contrasena'];
-                $_SESSION['idCliente'] = $row[0];
+                $_SESSION['clienteId'] = $row[0];
                 echo "exito ";
                 echo  $_SESSION['idCliente'];
                 header('Location: ../inicio.php');

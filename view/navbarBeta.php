@@ -2,6 +2,12 @@
 	require_once('controller/genero.controller.php');
   	$generoC = new GeneroController;
   	$generos = $generoC->ObtenerTableAllGeneros();  
+
+	  if (isset($_SESSION['user'])){
+		require_once('controller/carro.controller.php');
+  		$carroController = new CarroController;
+  		$cantidadJuegosCarro = $carroController->ObtenerCantJuegosCarro($_SESSION['clienteId']); 
+	  }
 ?>
 
   <header class="header-area overlay">
@@ -40,9 +46,9 @@
 			else {?>
 			<button class="btn btn-outline-success"  type="button"><i class="fa fa-user"></i>  <?php echo $_SESSION['user'] ?></button>
 
-			<a class="text-reset me-3" style="padding-left: 20px; height: 100px;"   href="#">
+			<a class="text-reset me-3" style="padding-left: 20px; height: 100px;"   href="carro.php">
 				<span><i class="fa fa-shopping-cart" style="font-size:24px"></i></span>
-				<span class="badge rounded-pill badge-notification bg-danger" style="font-size:16px">999</span>
+				<span class="badge rounded-pill badge-notification bg-danger" style="font-size:16px"><?php echo $cantidadJuegosCarro ?></span>
 			</a>
 			<?php } ?>
 

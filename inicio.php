@@ -10,7 +10,7 @@
   $currentMonth = date("m");
   $currentDay = date("d");
 
-  $MESES_NUEVO = 1;
+  $MESES_NUEVO = 5;
 
   if($currentMonth - $MESES_NUEVO <= 0){
     $currentYear -=1;
@@ -70,6 +70,7 @@
 
         <section class="container-products" style="padding-top: 20px;">
         <?php foreach($mejoresJuegos as $juegoM){?>
+          <a href="detalles.php?juego_id=<?php echo $juegoM['juego_id']?>">
           <div class="          <?php if ($juegoM['fecha_lanzamiento']> $newRelease) {echo 'product-new';}else{echo 'product';} ?> ">
             <img src="<?php echo $juegoM['direccion_imagen']; ?>" alt="" class="product__img">
             <div class="product__description">
@@ -78,6 +79,7 @@
             </div>
             <i class="product__icon fa fa-cart-plus" style="font-size:16px" ></i>
           </div>
+          </a>
         <?php } ?>
         </section>
 
