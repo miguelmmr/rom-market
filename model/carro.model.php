@@ -33,5 +33,13 @@
             $result = $conn->query($stmt);
 
         }
+
+        /*---- Registra juego al carro de un cliente --*/
+        public function EliminarCarro($carroId){
+            include('connection.php');
+            $stmt = "DELETE FROM `rom_market`.`carro` WHERE (`carro_id` =  '".$carroId."');";
+            $result = $conn->query($stmt);
+
+        }
     }
 ?>

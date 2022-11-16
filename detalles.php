@@ -56,7 +56,7 @@
 						<h4 class="price"><span>$<?php echo $juego ['precio'];?></span></h4>
 
                         <div class="section" style="padding-bottom:20px;">
-						<a  href="ejecutarCompra.php?juegoId=<?php echo $juego['juego_id']?>">
+						<a  href="agregarCarro.php?juegoId=<?php echo $juego['juego_id']?>">
 						<button class="btn btn-success" > Agregar al carro</button></a>
                         </div>    
 					</div>

@@ -57,15 +57,14 @@
                       <div class="d-flex flex-column mt-2" style="display: flex; padding-top: 5%">
                         <button class="btn btn-primary btn-sm mb-4"  type="button">Details</button>
                     </div>
-                    <div class = "buttons-search" style="display: flex; margin-left: 30%">
+                    <div class = "buttons-search" style="display: flex; margin-left: 15%">
 
-                        <button type="button" class="btn btn-danger" style="display: flex; margin-left: 0%" data-mdb-toggle="tooltip"
+                        <button type="button" class="btn btn-danger" style="display: flex; margin-left: 15%" data-mdb-toggle="tooltip"
                             title="Mover a Wishlist">
                             <i class="fa fa-heart"></i></button>
-                        <a  href="agregarCarro.php?juegoId=<?php echo $juego['juego_id']?>" >
-                        <button type="button" class="btn btn-success" style="display: flex; margin-left: 75%" data-mdb-toggle="tooltip"
+                        <button type="button" class="btn btn-success" style="display: flex; margin-left: 15%" data-mdb-toggle="tooltip"
                             title="Agregar a Carro">
-                            <i class="fa fa-cart-plus"></i></button></a>
+                            <i class="fa fa-cart-plus"></i></button>
                     </div>
                   </div>
               </div>

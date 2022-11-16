@@ -70,9 +70,10 @@
                     <td class="text-right font-weight-semibold align-middle p-4"><?php echo $juego ['promocion'];?>%</td>
                     <td class="text-right font-weight-semibold align-middle p-4">$<?php echo $subtotalPrecio; ?></td>
                     <td class="text-center align-middle px-0">
-                        <button type="button" class="btn btn-primary btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
-                    title="Remover Juego">
-                    <i class="fa fa-trash"></i></button>
+                      <a  href="removerCarro.php?carroId=<?php echo $juego['carro_id']?>">
+                        <button type="button" class="btn btn-secondary btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
+                      title="Remover Juego">
+                    <i class="fa fa-trash"></i></button></a>
                     <button type="button" class="btn btn-danger btn-sm mb-2" data-mdb-toggle="tooltip"
                     title="Mover a Wishlist">
                     <i class="fa fa-heart"></i>

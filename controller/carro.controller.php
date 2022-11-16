@@ -25,6 +25,11 @@ class CarroController{
 
     }
 
+    public function EliminarCarro($carroId){
+        $this->model->EliminarCarro($carroId);
+
+    }
+
     public function ObtenerCantJuegosCarro($clienteId){
         $cant = $this->model->ObtenerCantJuegosCarro($clienteId);
 
