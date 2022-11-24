@@ -20,22 +20,25 @@ class CarroController{
         }
     }
 
-    public function RegistrarCarro($clienteId, $juegoId){
-        $this->model->RegistrarCarro($clienteId, $juegoId);
-
-    }
-
-    public function EliminarCarro($carroId){
-        $this->model->EliminarCarro($carroId);
-
-    }
-
     public function ObtenerCantJuegosCarro($clienteId){
         $cant = $this->model->ObtenerCantJuegosCarro($clienteId);
 
         return $cant;
     }
 
+    public function RegistrarJuegoCarro($clienteId, $juegoId){
+        $this->model->RegistrarJuegoCarro($clienteId, $juegoId);
 
+    }
+
+    public function EliminarJuegoCarro($carroId){
+        $this->model->EliminarJuegoCarro($carroId);
+
+    }
+
+    public function EliminarJuegosCarroByClienteId($clienteId){
+        $this->model->EliminarJuegosCarroByClienteId($clienteId);
+
+    }
 
 }

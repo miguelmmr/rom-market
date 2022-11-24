@@ -2,9 +2,21 @@
   session_start();
 
   require_once('controller/juego.controller.php');
-  $juegoC = new JuegoController;
-  $juego = $juegoC->ObtenerJuegoById($_GET['juego_id']); 
+  $juegoController = new JuegoController;
+  $juego = $juegoController->ObtenerJuegoById($_GET['juego_id']); 
 
+  $imagenesJuegos = $juegoController->ObtenerImagenesSecundariasJuegoById($_GET['juego_id']); 
+
+  $existeEnLibreria = False;
+
+  if(isset($_SESSION['clienteId'])){
+
+	require_once('controller/libreria.controller.php');
+	$libreriaController = new LibreriaController;
+	$existeEnLibreria = $libreriaController->juegoEnLibreriaCliente($_GET['juego_id'], $_SESSION['clienteId']);
+
+  }
+  
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +34,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu:500">
     <link rel="stylesheet" type="text/css" href="styles/inicioStyle.css">
-    <link href="styles/detallesTestStyle.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="styles/tests/listaJuegosStyle.css">
+    <link rel="stylesheet" href="styles/detallesTestStyle.css" rel="stylesheet">
+	
     
 </head>
 
@@ -36,28 +50,43 @@
 					<div class="preview col-md-6">
 						
 						<div class="preview-pic tab-content">
-						  <div class="tab-pane active" id="pic-1"><img src="<?php echo $juego ['direccion_imagen'];?>" /></div>
-
+						  <div class="tab-pane active" id="pic-<?php echo $juego['imagen_juego_id'];?>"><img src="<?php echo $juego ['direccion_imagen'];?>" /></div>
+						  <?php foreach($imagenesJuegos as $imagen){?>
+						  <div class="tab-pane" id="pic-<?php echo $imagen ['imagen_juego_id'];?>"><img src="<?php echo $imagen ['direccion_imagen'];?>" /></div>
+						  <?php } ?>
 						</div>
+
+						<ul class="preview-thumbnail nav nav-tabs">
+						  <li class="active"><a data-target="#pic-<?php echo $juego['imagen_juego_id'];?>" data-toggle="tab"><img src="<?php echo $juego ['direccion_imagen'];?>" /></a></li>
+						  <?php foreach($imagenesJuegos as $imagen){?>
+						  <li><a data-target="#pic-<?php echo $imagen['imagen_juego_id'];?>" data-toggle="tab"><img src="<?php echo $imagen ['direccion_imagen'];?>" /></a></li>
+						  <?php } ?>
+						</ul>
+
 					</div>
 					<div class="details col-md-6">
 						<h3 class="product-title"><?php echo $juego['nombre'];?></h3>
 						<div class="rating">
-							<div class="stars">
-								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star"></span>
-								<span class="fa fa-star"></span>
-							</div>
+							<?php
+							$rating = $juego['rating'];
+							include('view/rating.php');?>
 							<span class="review-no"><?php echo $juego ['cant_rating'];?> reviews</span>
 						</div>
 						<p class="product-description"><?php echo $juego ['descripcion'];?></p>
-						<h4 class="price"><span>$<?php echo $juego ['precio'];?></span></h4>
+						<h4 class="mr-1">S/.<?php echo $juego ['precio']*(100-$juego ['promocion'])/100;?></h4>
+						<?php if ($juego ['promocion'] != 0){ ?>
+						<span class="strike-text">S/.<?php echo $juego ['precio'];?></span>
+						<?php } ?>
 
                         <div class="section" style="padding-bottom:20px;">
-						<a  href="agregarCarro.php?juegoId=<?php echo $juego['juego_id']?>">
-						<button class="btn btn-success" > Agregar al carro</button></a>
+						<?php if ($existeEnLibreria){ ?>
+							<a  href="#">
+							<button class="btn btn-primary" style="display: flex"> Descargar</button></a>
+						<?php }
+						else { ?>
+							<a  href="agregarCarro.php?juegoId=<?php echo $juego['juego_id']?>">
+							<button class="btn btn-success" > Agregar al carro</button></a>
+						<?php } ?>
                         </div>    
 					</div>
 				</div>

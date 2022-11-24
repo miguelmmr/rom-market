@@ -1,9 +1,9 @@
 <?php 
   session_start();
 
-  require_once('controller/juego.controller.php');
-  $juegoController = new JuegoController;
-  $juegoS = $juegoController->ObtenerTableJuegosBySearch($_GET['search']); 
+  require_once('controller/wishlist.controller.php');
+  $wishlistController = new WishlistController;
+  $juegoS = $wishlistController->ObtenerTableWishlistByClienteId($_SESSION['clienteId']); 
 
   require_once('controller/genero.controller.php');
   $generoController = new GeneroController;
@@ -25,7 +25,6 @@
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu:500">
     <link rel="stylesheet" type="text/css" href="styles/inicioStyle.css">
     <link rel="stylesheet" type="text/css" href="styles/tests/listaJuegosStyle.css">
-    <link rel="stylesheet" href="styles/detallesTestStyle.css" rel="stylesheet">
     
 </head>
 
@@ -34,16 +33,16 @@
 <div class="container mt-5 mb-5">
     <div class="d-flex justify-content-center row">
         <div class="col-md-10">
+        <h2 class="font-weight-bold py-3 mb-4">
+      Wishlist
+    </h2>
             <?php foreach($juegoS as $juego){ ?>
               <div class="row p-2 bg-white border rounded mt-2">
                   <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image" src="<?php echo $juego ['direccion_imagen'];?>"></div>
                   <div class="col-md-6 mt-1">
                       <h5><?php echo $juego['nombre'];?></h5>
                       <div class="d-flex flex-row">
-                      <?php
-                        $rating = $juego['rating'];
-                        include('view/rating.php');?>
-                        <span><?php echo $juego ['cant_rating'];?></span>
+                          <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div><span><?php echo $juego ['cant_rating'];?></span>
                       </div>
                         <div class="mt-1 mb-1 spec-1">
                       <?php
@@ -57,18 +56,18 @@
                   <div class="align-items-center align-content-center col-md-3 border-left mt-1">
                       <div class="d-flex flex-row align-items-center">
                       <h4 class="mr-1">S/.<?php echo $juego ['precio']*(100-$juego ['promocion'])/100;?></h4>
-                        <?php if ($juego ['promocion'] != 0){ ?>
-                        <span class="strike-text">S/.<?php echo $juego ['precio'];?></span>
-                        <?php } ?>
+                      <?php if ($juego ['promocion'] != 0){ ?>
+                      <span class="strike-text">S/.<?php echo $juego ['precio'];?></span>
+                      <?php } ?>
                       </div>
                       <div class="d-flex flex-column mt-2" style="display: flex; padding-top: 5%">
                         <button class="btn btn-primary btn-sm mb-4"  type="button">Detalles</button>
                     </div>
                     <div class = "buttons-search" style="display: flex; margin-left: 30%">
-                        <a  href="agregarWishlist.php?juegoId=<?php echo $juego['juego_id']?>" >
-                        <button type="button" class="btn btn-danger" style="display: flex; margin-left: 0%" data-mdb-toggle="tooltip"
-                            title="Mover a Wishlist">
-                            <i class="fa fa-heart"></i></button></a>
+                        <a  href="removerWishlist.php?wishlistId=<?php echo $juego['wishlist_id']?>" >
+                        <button type="button" class="btn btn-secondary" style="display: flex; margin-left: 0%" data-mdb-toggle="tooltip"
+                            title="Remover de Wishlist">
+                            <i class="fa fa-trash"></i></button></a>
                         <a  href="agregarCarro.php?juegoId=<?php echo $juego['juego_id']?>" >
                         <button type="button" class="btn btn-success" style="display: flex; margin-left: 75%" data-mdb-toggle="tooltip"
                             title="Agregar a Carro">

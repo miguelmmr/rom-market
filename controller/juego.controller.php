@@ -30,6 +30,26 @@ class JuegoController{
         }
     }
 
+    public function ObtenerImagenesSlider(){
+        $tabla = $this->model->ObtenerImagenesSlider();
+        if($tabla=='error'){
+            echo('error');
+        }
+        else{
+            return $tabla;
+        }
+    }
+
+    public function ObtenerImagenesSecundariasJuegoById($juego_id){
+        $tabla = $this->model->ObtenerImagenesSecundariasJuegoById($juego_id);
+        if($tabla=='error'){
+            echo('error');
+        }
+        else{
+            return $tabla;
+        }
+    }
+
     public function ObtenerTableJuegosBySearch($search){
         $tabla = $this->model->ObtenerTableJuegosBySearch($search);
         if($tabla=='error'){
@@ -58,6 +78,11 @@ class JuegoController{
         else{
             return $tabla;
         }
+    }
+
+    public function actualizarRatingJuego($juegoId, $ratingNuevo, $cantRating){
+        $this->model->actualizarRatingJuego($juegoId, $ratingNuevo, $cantRating);
+
     }
 
 

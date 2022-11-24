@@ -13,7 +13,6 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/fontawesome.min.css" integrity="sha384-z4tVnCr80ZcL0iufVdGQSUzNvJsKjEtqYZjiQrrYKlpGow+btDHDfQWkFjoaz/Zr" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="styles/navbarBetaStyle.css">
   <link rel="stylesheet" type="text/css" href="styles/sliderStyle.css">
   <link rel="stylesheet" type="text/css" href="styles/tests/carroTestStyle.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,6 +23,7 @@
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu:500">
   <link rel="stylesheet" type="text/css" href="styles/inicioStyle.css">
   <link href="styles/detallesTestStyle.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="styles/navbarBetaStyle.css">
   
 </head>
 
@@ -72,7 +72,7 @@
                     <td class="text-center align-middle px-0">
                       <a  href="removerCarro.php?carroId=<?php echo $juego['carro_id']?>">
                         <button type="button" class="btn btn-secondary btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
-                      title="Remover Juego">
+                      title="Remover de Carro">
                     <i class="fa fa-trash"></i></button></a>
                     <button type="button" class="btn btn-danger btn-sm mb-2" data-mdb-toggle="tooltip"
                     title="Mover a Wishlist">
@@ -104,7 +104,8 @@
         
             <div class="float-right">
             <a  href="inicio.php"><button type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3" href="inicio.php">Seguir Comprando</button></a>
-              <button type="button" class="btn btn-success">Finalizar Compra</button>
+            <a  href="ejecutarCompra.php?precioTotal=<?php echo $totalPrecio;?>&juegosId=<?php foreach($juegoCarroCliente as $juego){echo $juego['juego_id']; echo",";}?>">
+            <button type="button" class="btn btn-success">Finalizar Compra</button></a>
             </div>
         
           </div>

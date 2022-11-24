@@ -30,6 +30,34 @@
             }
         }
 
+        /*----Devuelve lista de imagenes de carusel--*/
+        public function ObtenerImagenesSlider(){
+            include('connection.php');
+            $stmt = "select * from imagen_juego ij, juego j where j.juego_id = ij.juego and ij.tipo_imagen = 'C' ";
+            $result = $conn->query($stmt);
+            $tabla = $result->fetch_all();
+            if($tabla){
+                return $tabla;
+            }
+            else{
+                return 'error';
+            }
+        }
+
+        /*----Devuelve lista de imagenes secundarias de un juego--*/
+        public function ObtenerImagenesSecundariasJuegoById($juego_id){
+            include('connection.php');
+            $stmt = "select * from juego j, imagen_juego ij where j.juego_id = ij.juego and ij.tipo_imagen = 'S' and juego_id = ".$juego_id;
+            $result = $conn->query($stmt);
+            $result->fetch_all();
+            if($result){
+                return $result;
+            }
+            else{
+                return 'error';
+            }
+        }
+
          /*----Devuelve un juego por busqueda--*/
          public function ObtenerTableJuegosBySearch($search){
             include('connection.php');
@@ -70,6 +98,14 @@
             else{
                 return 'error';
             }
+        }
+
+        /*---- Actualiza rating total del juego  --*/
+        public function actualizarRatingJuego($juegoId, $ratingNuevo, $cantRating){
+            include('connection.php');
+            $stmt = "UPDATE `rom_market`.`juego` SET `rating` = '".$ratingNuevo."', `cant_rating` = '".$cantRating."' WHERE (`juego_id` = '".$juegoId."');";
+            $result = $conn->query($stmt);
+
         }
     }
 ?>

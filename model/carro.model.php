@@ -27,17 +27,24 @@
         }
 
         /*---- Registra juego al carro de un cliente --*/
-        public function RegistrarCarro($clienteId, $juegoId){
+        public function RegistrarJuegoCarro($clienteId, $juegoId){
             include('connection.php');
             $stmt = "INSERT INTO `rom_market`.`carro` (`cliente_id`, `juego_id`, `estado`) VALUES ('".$clienteId."', '".$juegoId."', 'A');";
             $result = $conn->query($stmt);
 
         }
 
-        /*---- Registra juego al carro de un cliente --*/
-        public function EliminarCarro($carroId){
+        /*---- Elimina juego al carro de un cliente --*/
+        public function EliminarJuegoCarro($carroId){
             include('connection.php');
             $stmt = "DELETE FROM `rom_market`.`carro` WHERE (`carro_id` =  '".$carroId."');";
+            $result = $conn->query($stmt);
+
+        }
+
+        public function EliminarJuegosCarroByClienteId($clienteId){
+            include('connection.php');
+            $stmt = "DELETE FROM `rom_market`.`carro` WHERE (`cliente_id` =  '".$clienteId."');";
             $result = $conn->query($stmt);
 
         }

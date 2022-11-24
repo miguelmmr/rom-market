@@ -41,6 +41,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu:500">
   <link rel="stylesheet" type="text/css" href="styles/inicioStyle.css">
+  <link rel="stylesheet" type="text/css" href="styles/tests/listaJuegosStyle.css">
+  <link rel="stylesheet" href="styles/detallesTestStyle.css" rel="stylesheet">
 
 
 
@@ -50,7 +52,7 @@
 
   <?php include('view/navbarBeta.php');?>
 
-  <?php include('view/slider.html');?>
+  <?php include('view/slider.php');?>
 
   <main class="main" style="padding-top: 20px;">
     <div class="container">
@@ -58,18 +60,21 @@
 
       <section class="container-products" style="padding-top: 20px; padding-bottom: 20px;">
         <?php foreach($juegosRecientes as $juegoR){?>
-        <a href="detalles.php?juego_id=<?php echo $juegoR['juego_id']?>">
           <div
             class="          <?php if ($juegoR['fecha_lanzamiento']> $newRelease) {echo 'product-new';}else{echo 'product';} ?> ">
-            <img src="<?php echo $juegoR['direccion_imagen']; ?>" alt="" class="product__img">
+            <a href="detalles.php?juego_id=<?php echo $juegoR['juego_id']?>">
+              <img src="<?php echo $juegoR['direccion_imagen']; ?>" alt="" class="product__img">
+            </a>
             <div class="product__description">
               <h3 class="product__title"><?php echo $juegoR['nombre']; ?></h3>
-              <span class="product__price">$<?php echo $juegoR['precio']; ?></span>
+              <h4 class="mr-1">S/.<?php echo $juegoR['precio']*(100-$juegoR['promocion'])/100;?></h4>
+						<?php if ($juegoR['promocion'] != 0){ ?>
+						<span class="strike-text">S/.<?php echo $juegoR['precio'];?></span>
+						<?php } ?>
             </div>
             <i class=" fa fa-cart-plus" style="font-size:16px"></i>
             <i class=" fa fa-heart" style="font-size:16px"></i>
           </div>
-        </a>
         <?php } ?>
       </section>
 
@@ -87,8 +92,8 @@
             <h3 class="product__title"><?php echo $juegoM['nombre']; ?></h3>
             <span class="product__price">$<?php echo $juegoM['precio']; ?></span>
           </div>
-          <i class="fa fa-cart-plus" style="font-size:16px"></i>
-          <i class="fa fa-heart" style="font-size:16px"></i>
+          <a  href="agregarWishlist.php?juegoId=<?php echo $juego['juego_id']?>" ><i class="fa fa-heart" style="font-size:16px"></i></a>
+          <a  href="agregarCarro.php?juegoId=<?php echo $juego['juego_id']?>" ><i class="fa fa-cart-plus" style="font-size:16px"></i></a>
         </div>
 
         <?php } ?>

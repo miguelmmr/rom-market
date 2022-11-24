@@ -1,3 +1,10 @@
+<?php
+
+	require_once('controller/juego.controller.php');
+	$juegoC = new JuegoController;
+	$juegosCarusel = $juegoC->ObtenerImagenesSlider(); 
+?>
+
 <div class="carousel-container" style="margin-bottom: 20px">
 	<div
 		id="carouselExampleIndicators"
@@ -13,30 +20,17 @@
 			<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
 		</ol>
 		<div class="carousel-inner" style="height: 100%">
-			<div class="carousel-item active">
-				<img
+		<?php for ($i=0; $i<3; $i++){?>
+			<div class="carousel-item <?php if($i==0){echo 'active';} ?>">
+				<a href="detalles.php?juego_id=<?php echo $juegosCarusel[$i][2];?>"><img
 					class="d-block"
-					style="width: 100vw"
-					src="https://i.blogs.es/5432d4/thumb-1920-985300/840_560.jpeg"
-					alt="First slide" />
+					style="width: 100vw;"
+					src="<?php echo $juegosCarusel[$i][1]; ?>"
+					alt="First slide" /></a>
 				<div class="carousel-caption d-none d-md-block"></div>
 			</div>
-			<div class="carousel-item">
-				<img
-					class="d-block"
-					style="width: 100vw"
-					src="https://townsquare.media/site/295/files/2020/09/super-mario-bros.jpg"
-					alt="Second slide" />
-				<div class="carousel-caption d-none d-md-block"></div>
-			</div>
-			<div class="carousel-item">
-				<img
-					class="d-block"
-					style="width: 100vw"
-					src="https://pbs.twimg.com/media/EfAX08QXkAIPg4K.jpg:large"
-					alt="Third slide" />
-				<div class="carousel-caption d-none d-md-block"></div>
-			</div>
+			<?php } ?>
+
 		</div>
 		<a
 			class="carousel-control-prev"

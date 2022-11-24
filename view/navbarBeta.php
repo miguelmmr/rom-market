@@ -4,9 +4,14 @@
   	$generos = $generoC->ObtenerTableAllGeneros();  
 
 	  if (isset($_SESSION['user'])){
-		require_once('controller/carro.controller.php');
+		  require_once('controller/carro.controller.php');
   		$carroController = new CarroController;
   		$cantidadJuegosCarro = $carroController->ObtenerCantJuegosCarro($_SESSION['clienteId']); 
+
+      require_once('controller/cliente.controller.php');
+      $clienteController = new ClienteController;
+      $saldoCliente = $clienteController->ObtenerSaldoByClienteId($_SESSION['clienteId']); 
+    
 	  }
 ?>
 
@@ -21,33 +26,45 @@
       <div class="d-flex justify-content-lg-between justify-content-end position-absolute"
         style="bottom:12px;width:100%">
 
-        <div class="cont-right-top">
-          <?php if (empty($_SESSION['user'])){ ?>
-          <a class="btn btn-outline-success" href="login.html" type="button"><i class="fa fa-user"></i> Login /
-            Signup</a>
-          <?php }
-				else {?>
-          <button class="btn btn-outline-success" type="button"><i class="fa fa-user"></i>
-            <?php echo $_SESSION['user'] ?></button>
-
-          <a class="text-reset me-3" style="padding-left: 20px; height: 100px; color: red" href="carro.php">
-            <span><i class="fa fa-shopping-cart" style="font-size:24px"></i></span>
-            <span class="badge rounded-pill badge-notification bg-danger"
-              style="font-size:16px"><?php echo $cantidadJuegosCarro ?></span>
-          </a>
-          <?php } ?>
-
-        </div>
-
-        <form class="form-inline" action="busqueda.php" style="width:200px">
-          <div class="input-group search-box">
-            <input type="text" name="search" class="form-control" placeholder="Busca Juegos" aria-label="Search for...">
+        <form class="form-inline" action="busqueda.php" >
+          <div class="input-group search-box" style="margin: auto; margin-left: 20px">
+            <input type="text"  name="search" class="form-control" placeholder="Busca Juegos" aria-label="Search for...">
             <span class="input-group-btn">
-              <button class="btn btn-secondary" type="submit"><i class="fa fa-search"
+              <button class="btn btn-secondary" style="height: 31px;" type="submit"><i class="fa fa-search"
                   style="color: white; font-size:24px"></i></button>
             </span>
           </div>
         </form>
+
+
+
+        <div class="col-md-18" style="margin-right: 7%; " >
+          <?php if (empty($_SESSION['user'])){ ?>
+          <a class="btn btn-outline-success " href="login.html" type="button"><i class="fa fa-user"></i> Login / Signup</a>
+          <?php }
+				  else {?>
+
+            <a class="text-reset col-md-9" style="margin-left: 20px; height: 100px; color: red" href="carro.php">
+              <span><i class="fa fa-shopping-cart" style="font-size:24px; color: white;"></i></span>
+              <span class="badge rounded-pill badge-notification bg-danger"
+                style="font-size:16px"><?php echo $cantidadJuegosCarro ?></span>
+            </a>
+
+          <ul class="navbar-nav ml-auto" style=" ">
+            <li class="dropdown">
+              <a href="#" class="nav-item nav-link" data-toggle="dropdown"><?php echo $_SESSION['user']."  S/.".$saldoCliente ?></a>
+              <div class="dropdown-menu">
+                <a href="profileBeta.php" class="dropdown-item">Configuracion</a>
+                <a href="model/logout.php" class="dropdown-item">Salir Session</a>
+              </div>
+            </li>
+          </ul>
+
+          
+          <?php } ?>
+
+        </div>
+
       </div>
       <!-- Opciones -->
       <div id="main-nav" class="d-none d-md-flex justify-content-lg-center justify-content-start" style="width:100%">
@@ -62,8 +79,8 @@
             </div>
           </li>
 
-          <li><a href="#" class="nav-item nav-link">Libreria</a></li>
-          <li><a href="#" class="nav-item nav-link">Wishlist</a></li>
+          <li><a href="libreria.php" class="nav-item nav-link">Libreria</a></li>
+          <li><a href="wishlist.php" class="nav-item nav-link">Wishlist</a></li>
           <li><a href="#" class="nav-item nav-link">Soporte</a></li>
         </ul>
       </div>

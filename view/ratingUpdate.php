@@ -1,13 +1,12 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/fontawesome.min.css" integrity="sha384-z4tVnCr80ZcL0iufVdGQSUzNvJsKjEtqYZjiQrrYKlpGow+btDHDfQWkFjoaz/Zr" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="../../styles/tests/ratingTest2Style.css">
+
     
-<div class="container d-flex justify-content-center mt-100">
-    <div class="row">
+<div class="container ">
+    <div class="row md-6">
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body text-center"> 
-                 <span class="myratings">4.5</span>
-                    <h4 class="mt-1">Rate us</h4>
+                 <span class="myratings" id="valueNewRating" ></span>
+                    <h4 class="mt-1">---------</h4>
 
                     <fieldset class="rating">
                         <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
@@ -27,7 +26,3 @@
         </div>
     </div>
 </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-  <script src="../../scripts/ratingTest2.js"></script>
