@@ -56,44 +56,77 @@
 
   <main class="main" style="padding-top: 20px;">
     <div class="container">
-      <h2 class="main-title" style="font-weight: bold; color: black">Juegos Recientes</h2>
+      <h2 class="main-title" style="font-weight: bold; color: white">Juegos Recientes</h2>
 
       <section class="container-products" style="padding-top: 20px; padding-bottom: 20px;">
         <?php foreach($juegosRecientes as $juegoR){?>
-          <div
-            class="          <?php if ($juegoR['fecha_lanzamiento']> $newRelease) {echo 'product-new';}else{echo 'product';} ?> ">
-            <a href="detalles.php?juego_id=<?php echo $juegoR['juego_id']?>">
-              <img src="<?php echo $juegoR['direccion_imagen']; ?>" alt="" class="product__img">
-            </a>
-            <div class="product__description">
-              <h3 class="product__title"><?php echo $juegoR['nombre']; ?></h3>
-              <h4 class="mr-1">S/.<?php echo $juegoR['precio']*(100-$juegoR['promocion'])/100;?></h4>
-						<?php if ($juegoR['promocion'] != 0){ ?>
-						<span class="strike-text">S/.<?php echo $juegoR['precio'];?></span>
-						<?php } ?>
+        <div
+          class="          <?php if ($juegoR['fecha_lanzamiento']> $newRelease) {echo 'product-new';}else{echo 'product';} ?>"
+          style="background-color:rgb(0,0,0,0.3)">
+          <a href="detalles.php?juego_id=<?php echo $juegoR['juego_id']?>">
+            <img src="<?php echo $juegoR['direccion_imagen']; ?>" alt="" class="product__img">
+          </a>
+          <div class="d-flex flex-column justify-content-start mt-3">
+            <h3 class="text-light align-self-start"><?php echo $juegoR['nombre']; ?></h3>
+            <div class="d-flex align-items-center">
+              <div class="bg-dark d-flex align-items-center p-3" style="border-radius:12px">
+                <h4 class="bg-dark text-light">S/.<?php echo $juegoR['precio']*(100-$juegoR['promocion'])/100;?></h4>
+                <div class="dropdown bg-dark ml-2">
+                  <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+                    aria-expanded="false">
+                  </button>
+                  <div class="dropdown-menu bg-dark">
+                    <a class="dropdown-item" href="agregarWishlist.php?juegoId=<?php echo $juego['juego_id']?>"><i
+                        class="fa fa-heart" style="font-size:16px; color:red"></i></a>
+                    <a class="dropdown-item" href="agregarCarro.php?juegoId=<?php echo $juego['juego_id']?>"><i
+                        class="fa fa-cart-plus" style="font-size:16px; color:green"></i></a>
+                  </div>
+                </div>
+              </div>
+              <div class="ml-2">
+                <?php if ($juegoR['promocion'] != 0){ ?>
+                <h4 class="strike-text">S/.<?php echo $juegoR['precio'];?></h4>
+                <?php } ?>
+              </div>
             </div>
-            <i class=" fa fa-cart-plus" style="font-size:16px"></i>
-            <i class=" fa fa-heart" style="font-size:16px"></i>
+
           </div>
+        </div>
         <?php } ?>
       </section>
 
-      <h2 class="main-title" style="font-weight: bold; padding-top: 20px; color: black">Mejores Juegos</h2>
+      <h2 class="main-title" style="font-weight: bold; padding-top: 20px; color: white">Mejores Juegos</h2>
 
       <section class="container-products" style="padding-top: 20px;">
         <?php foreach($mejoresJuegos as $juegoM){?>
 
         <div
-          class="          <?php if ($juegoM['fecha_lanzamiento']> $newRelease) {echo 'product-new';}else{echo 'product';} ?> ">
+          class="          <?php if ($juegoM['fecha_lanzamiento']> $newRelease) {echo 'product-new';}else{echo 'product';} ?>"
+          style="background-color:rgb(0,0,0,0.3)">
           <a href="detalles.php?juego_id=<?php echo $juegoM['juego_id']?>">
             <img src="<?php echo $juegoM['direccion_imagen']; ?>" alt="" class="product__img">
           </a>
-          <div class="product__description">
-            <h3 class="product__title"><?php echo $juegoM['nombre']; ?></h3>
-            <span class="product__price">$<?php echo $juegoM['precio']; ?></span>
+          <div class="d-flex flex-column justify-content-start mt-3">
+            <h3 class="text-light align-self-start"><?php echo $juegoM['nombre']; ?></h3>
+            <div class="d-flex align-items-center">
+              <div class="bg-dark d-flex align-items-center p-3" style="border-radius:12px">
+                <h4 class="bg-dark text-light">$<?php echo $juegoM['precio']; ?></h4>
+                <div class="dropdown bg-dark ml-2">
+                  <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+                    aria-expanded="false">
+                  </button>
+                  <div class="dropdown-menu bg-dark">
+                    <a class="dropdown-item" href="agregarWishlist.php?juegoId=<?php echo $juego['juego_id']?>"><i
+                        class="fa fa-heart" style="font-size:16px; color:red"></i></a>
+                    <a class="dropdown-item" href="agregarCarro.php?juegoId=<?php echo $juego['juego_id']?>"><i
+                        class="fa fa-cart-plus" style="font-size:16px; color:green"></i></a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </div>
-          <a  href="agregarWishlist.php?juegoId=<?php echo $juego['juego_id']?>" ><i class="fa fa-heart" style="font-size:16px"></i></a>
-          <a  href="agregarCarro.php?juegoId=<?php echo $juego['juego_id']?>" ><i class="fa fa-cart-plus" style="font-size:16px"></i></a>
+
         </div>
 
         <?php } ?>
